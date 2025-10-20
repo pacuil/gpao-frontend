@@ -61,6 +61,7 @@ const addTag = () => {
  */
 const doSearch = () => {
   items.value[(items.value.length) - 1]!.children = items.value.flatMap(item => item.children).filter(item => item.text == searchValue.value)
+  activeIndex.value=items.value.length-1
 }
 
 const userList = ref(
