@@ -4,7 +4,10 @@ import TeamView from '@/views/TeamView.vue'
 import MyView from '@/views/MyView.vue'
 import UserUpdateView from '@/views/UserUpdateView.vue'
 import MyDetailView from '@/views/MyDetailView.vue'
-
+import LoginView from '@/views/LoginView.vue'
+import { ref } from 'vue'
+import useUserStore from '@/stores/useUserStore.ts'
+const FIRST_ENTER=ref(true)
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -35,8 +38,21 @@ const router = createRouter({
           component:UserUpdateView,
         }
       ]
+    },
+    {
+      path:'/login',
+      name:'login',
+      component:LoginView
     }
   ],
+})
+
+router.beforeEach(async (to, from, next)=>{
+  if (FIRST_ENTER.value) {
+    await useUserStore().fetchUserInfo()
+    FIRST_ENTER.value=false
+  }
+  next()
 })
 
 export default router

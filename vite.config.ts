@@ -9,6 +9,9 @@ import { VantResolver } from '@vant/auto-import-resolver';
 
 // https://vite.dev/config/
 export default defineConfig({
+  server:{
+    allowedHosts:['4a59455f.r1.cpolar.top']
+  },
   plugins: [
     vue(),
     vueDevTools(),
